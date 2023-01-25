@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-import autoIncrement from 'mongoose-auto-increment';
+const mongoose = require("mongoose");
+const  autoIncrement = require('mongoose-auto-increment');
 
 // how  document look like
 const userSchema = mongoose.Schema({
@@ -9,8 +9,9 @@ const userSchema = mongoose.Schema({
     phone: Number
 });
 
-// autoIncrement.initialize(mongoose.connection);
-// userSchema.plugin(autoIncrement.plugin, 'user');
-const postUser = mongoose.model('user', userSchema);
+autoIncrement.initialize(mongoose.connection);
+userSchema.plugin(autoIncrement.plugin, 'user');
 
-export default postUser;
+
+
+module.exports = mongoose.model('User', userSchema);
