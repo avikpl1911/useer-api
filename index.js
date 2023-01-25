@@ -17,7 +17,7 @@ const app = express();
 
 
 
-    const URL = `mongodb+srv://CRUD-Project:CRUD-Project@crud-project.jopaya8.mongodb.net/?retryWrites=true&w=majority`
+    const URL = `mongodb://CRUD-Project:CRUD-Project@ac-cswxkt4-shard-00-00.jopaya8.mongodb.net:27017,ac-cswxkt4-shard-00-01.jopaya8.mongodb.net:27017,ac-cswxkt4-shard-00-02.jopaya8.mongodb.net:27017/?ssl=true&replicaSet=atlas-2471y9-shard-0&authSource=admin&retryWrites=true&w=majority`
 
          mongoose.connect(URL, { useUnifiedTopology: true, useNewUrlParser: true },(err)=>{
                 
