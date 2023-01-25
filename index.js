@@ -1,22 +1,38 @@
-import express from 'express';
-import bodyParser from 'body-parser'; 
-import dotenv from 'dotenv';
-import cors from 'cors';
-import path from "path";
-import { fileURLToPath } from 'url';
+const express = require("express");
 
-import Routes from './server/route.js';
-import Connection from './database/db.js';
+const mongoose = require("mongoose");
 
-// const __filename = fileURLToPath(import.meta.url);
+const bodyParser = require("body-parser");
 
-// const __dirname = path.dirname(__filename);
+const dotenv = require("dotenv");
+
+const userRoute = require("./server/route");
+
+const cors = require("cors");
+
 const app = express();
 
-// app.use(express.static(path.join(__dirname,"./build")));
-// app.get("*",(req,res)=>{
-// res.sendFile(path.join(__dirname,"./build/index.html"));
-// });
+
+
+
+
+
+    const URL = `mongodb+srv://CRUD-Project:CRUD-Project@crud-project.jopaya8.mongodb.net/?retryWrites=true&w=majority`
+
+         mongoose.connect(URL, { useUnifiedTopology: true, useNewUrlParser: true },(err)=>{
+                
+             if(!err){
+                console.log('Database Connected Succesfully');
+             }else{
+                console.log(err)
+             }
+
+
+         }
+         
+      );
+
+
 
 dotenv.config();
 
@@ -24,12 +40,13 @@ app.use(bodyParser.json({extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
-app.use('/', Routes);
 
-const USERNAME = process.env.DB_USERNAME;
-const PASSWORD = process.env.DB_PASSWORD;
+
+
+app.use('/', userRoute);
+
+
 const PORT = process.env.PORT || 9889;
 
-Connection(USERNAME, PASSWORD);
  
 app.listen(PORT, () => console.log(`Server is running successfully on PORT ${PORT}`));
